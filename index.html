@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+                
+                
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        body{
+            
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* color: #040d1c; */
+        }
+        
+
+
+
+        header {
+            height: 12vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            /* background-color: #040d1c; */
+            z-index: 100;
+            
+        }
+        
+        h1{
+            color: #040d1c;
+        }
+       
+        .color-container{
+            height: 40px;
+            width:80px ;
+            background-color: #cec8c0;
+            display: flex;
+            align-items: center;
+            border-radius: 17px;
+            
+        }
+        .color-container-justify1{
+            justify-content: start;
+        }
+        .color-container-justify2{
+            justify-content:end;
+        }
+
+        .circle1{
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background-color: rgb(255, 166, 0);
+            box-shadow:inset 0px 0px 10px 2px rgb(125, 124, 124);
+            margin-left: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        .circle2{
+            height: 35px;
+            width: 35px;
+            border-radius: 50%;
+            background-color: rgb(237, 230, 230);
+            box-shadow:inset 0px 0px 10px 8px rgb(5, 4, 4);
+            margin-left: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        
+        .light2{
+            display: none;
+        }
+        .bodyColor{
+            position: absolute;
+            right: 10px;
+        }
+
+        
+
+        main {
+           
+            margin-top: 12vh;
+            overflow-y: auto;
+        }
+
+        .container2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        .todo-inputs {
+            
+            display: flex;
+            background-color:#040d1c;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0px 0px 10px 3px #ecd972;
+            width: 60%;
+            /* max-width: 800px; */
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+
+        .title,.Description,.adds{
+            display: flex;
+            flex-direction: column;
+        }
+        .Description, .title>p{
+            color: #040d1c;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        
+
+
+        @media (max-width:767px) {
+            .todo-inputs{
+                width: 90%;
+            }
+            .input-data,.input-data {
+                height: 30px;
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 17px;
+                border: 2px solid rgb(241, 239, 233);
+            }
+            .title, .Description{
+                width: 48%;
+                padding: 10px 5px;
+            }
+
+            .adds{
+                width: 50%;
+                justify-content: end;
+                margin-bottom: 10px;
+                /* place-items: center; */
+            }
+
+            .todo-task-container {
+                background-color: aliceblue;
+                margin: 15px 0px;
+                width: 90%;
+                box-shadow: 0px 0px 5px 5px rgb(192, 202, 199);
+                padding: 10px;
+            }
+
+            #todo-outputs {
+                width: 100%; 
+                max-width: 90%; 
+                margin-top: 20px; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+            }
+
+            
+        }
+
+        
+        @media (min-width:767px) {
+            
+            .todo-inputs{
+                padding: 10px 5px;
+                
+            }
+
+            .input-data {
+                height: 30px;
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 17px;
+                border: 2px solid rgb(241, 239, 233);
+            }
+            .title, .Description,.adds{
+                padding: 10px 5px;
+                
+            }
+            .adds{
+                align-self: flex-end;
+            }
+            
+
+            .todo-task-container {
+                padding: 10px;
+                background-color: aliceblue;
+                margin: 15px 0px;
+                width: 70%;
+                box-shadow: 0px 0px 5px 5px rgb(192, 202, 199);
+            }
+
+            #todo-outputs {
+                width: 84%; 
+                max-width:100%; 
+                margin-top: 20px; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+            }
+        }
+
+
+        input{
+            color: black;
+            font-weight: bold;
+        }
+        input:focus {
+            outline: none;
+            border-color: rgb(194, 126, 1);
+            box-shadow: 0px 0px 5px 2px rgba(248, 163, 4, 0.7);
+        }
+
+        input::placeholder {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .button {
+            color: white;
+            font-size: 16px;
+            padding: 17px 30px;
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #ff8c00;
+            background: linear-gradient(to right, #6c757d,#040d1c);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right,#040d1c, #6c757d);
+            box-shadow: 0px 0px 10px #ff8c00;
+        }
+        p,button{
+            color: #040d1c;
+        }
+        .to-do-head{
+            display: flex;
+            justify-content: space-between;
+        }
+        .to-do-main{
+            padding-top: 5px;
+            
+        }
+
+        .one{
+            font-weight: bold;
+        }
+
+        
+        
+        .todo-task-container .icons-output {
+            visibility: hidden; 
+            opacity: 0; 
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        .todo-task-container:hover .icons-output {
+            visibility: visible; 
+            opacity: 1; 
+            
+        }
+        .remove1, .edit1{
+            font-size: 20px;
+            color: #040d1c;
+            padding: 2px 10px;
+            
+        }
+    </style>
+
+    
+</head>
+<body class="body1">
+    <header>
+        <div class="container1">
+            <h1>Todo App</h1>
+        </div>
+
+        <div class="bodyColor">
+            <div class="color-container">
+                <div class="circle1">
+                    <i class="fa-solid fa-moon light1"></i>
+                    <i class="fa-regular fa-moon light2"></i>
+                </div>
+            </div>
+            
+        </div>
+    </header>
+    <main>
+        <div class="container2">
+            <div class="todo-inputs">
+                <div class="title">
+                    <p>Title</p>
+                    <input type="text" id="todo-title" class="input-data" placeholder="Enter your task">
+                </div>
+                
+                <div class="Description">
+                    <p>Description</p>
+                    <input type="text" id="todo-task" class="input-data" placeholder="Enter your task">
+                </div>
+                
+                <div class="adds">
+                    <button class="button" id="todo-add" >Add</button>
+                </div>
+                
+            </div>
+
+            <div id="todo-outputs">
+
+            </div>
+        </div>
+    </main>
+
+    
+    <script src="./script.js"></script>
+</body>
+</html>
