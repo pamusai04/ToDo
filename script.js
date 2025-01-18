@@ -16,13 +16,15 @@ bg_color.addEventListener("click", () => {
         document.querySelector('body').style.backgroundColor = '#fff';
         // document.querySelector('todo-inputs').style.backgroundColor = '#fff';
         document.querySelector('.todo-inputs').style.backgroundColor = '#040d1c';
+        document.querySelector('.todo-inputs').style.color = '#fff';
 
         document.querySelector('header').style.color = '#040d1c';
         document.querySelector('h1').style.color= '#040d1c';
+        
     } else {
         body_color.classList.remove("color-container-justify1");
         body_color.classList.add("color-container-justify2");
-
+       
         bg_color.classList.remove('circle1');
         bg_color.classList.add('circle2');
         document.querySelector('.light1').style.display = 'none';
@@ -32,11 +34,11 @@ bg_color.addEventListener("click", () => {
        document.querySelector('.todo-inputs').style.backgroundColor = '#fff';
 
         document.querySelector('h1').style.color = '#fff';
-      
+        
 
     }
 
-    console.log("Position toggled!");
+    
 });
 
 // Initialize data from localStorage
